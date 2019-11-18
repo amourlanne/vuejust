@@ -1,0 +1,42 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+  mariadb:
+#    container_name: mariadb
+    image: mariadb
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: smarts
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+#    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    restart: always
+    ports:
+      - '8080:80'
+    volumes:
+      - /sessions
+
+  maildev:
+#    container_name: maildev
+    image: djfarrelly/maildev
+    ports:
+      - '1080:80'
+      - '1025:25'
+
+  redis:
+#    container_name: redis
+    image: redis:5.0.0-alpine
+    ports:
+      - "6379:6379"
+volumes:
+  mysql_data:
