@@ -137,7 +137,6 @@
 import { email, minLength, required } from 'vuelidate/lib/validators';
 import LocaleChanger from '../components/LocaleChanger';
 import userService from '../services/user.service';
-import globalConfig from '../../../server/config';
 
 export default {
   name: 'register',

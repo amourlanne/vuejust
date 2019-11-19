@@ -1,9 +1,11 @@
-import globalConfig from '../../../server/config';
+import * as config from '../../../config.json';
 import axios from 'axios';
+
+const { token } = config.cookie;
 
 export default {
   logout() {
-    window.$cookies.remove(globalConfig.tokenPayloadCookieName);
+    window.$cookies.remove(token.payload.name);
   },
   authenticate() {
     return new Promise((resolve, reject) => {

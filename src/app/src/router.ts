@@ -4,8 +4,8 @@ import store from '@/store';
 import i18n from './translation';
 import locales from '@/locales.json';
 import PageNotFound from '@/views/PageNotFound.vue';
-import globalConfig from '../../server/config';
-import userService from './services/user.service';
+
+import * as config from '../../config.json';
 import { UserRole } from '../../server/src/entity/User';
 import authenticationService from './services/authentication.service';
 
@@ -132,7 +132,8 @@ router.beforeEach(async (to, from, next) => {
     });
   }
 
-  const isAuthenticated = !!window.$cookies.get(globalConfig.tokenPayloadCookieName);
+  const { cookie } = config;
+  const isAuthenticated = !!window.$cookies.get(cookie['token'].payload.name);
 
   if (isAuthenticated && !store.getters.hasCurrentUser) {
     try {

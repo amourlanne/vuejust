@@ -6,7 +6,7 @@ import router from './router';
 import store from './store';
 import i18n from '@/translation';
 import axios from 'axios';
-import globalConfig from '../../server/config';
+import * as config from '../../config.json';
 import 'bootstrap';
 import '@fortawesome/fontawesome-free/js/all';
 
@@ -25,7 +25,8 @@ axios.interceptors.response.use(
   config => config,
   error => {
     if (error.response && (error.response.status == 401 || error.response.status == 403)) {
-      window.$cookies.remove(globalConfig.tokenPayloadCookieName);
+      const { cookie } = config;
+      window.$cookies.remove(cookie['token'].payload.name);
       router.push({ name: 'login' });
       // TODO: set locale params
     }
