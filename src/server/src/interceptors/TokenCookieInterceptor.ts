@@ -1,7 +1,7 @@
 import {Interceptor, InterceptorInterface, Action} from "routing-controllers";
 import * as jwt from 'jsonwebtoken';
-import config from '../config/security';
-import authConfig from '../../config';
+import securityConfig from '../config/security';
+import * as config from '../../../config.json';
 
 @Interceptor()
 export class TokenCookieInterceptor implements InterceptorInterface {
@@ -13,7 +13,7 @@ export class TokenCookieInterceptor implements InterceptorInterface {
       const jwtPayload = { userId: user.id, username: user.username };
       const jwtOptions = {/* expiresIn: "1h" */};
 
-      const token = jwt.sign(jwtPayload, config.jwtAuthSecret, jwtOptions);
+      const token = jwt.sign(jwtPayload, securityConfig.jwtAuthSecret, jwtOptions);
 
       const splitToken = token.split('.');
       const tokenSignature = splitToken.pop();
@@ -27,7 +27,9 @@ export class TokenCookieInterceptor implements InterceptorInterface {
         maxAge: expireIn
       };
 
-      response.cookie(authConfig.tokenPayloadCookieName, tokenPayload, payloadCookieOptions);
+      const { cookie } = config;
+
+      response.cookie(cookie['token'].payload.name, tokenPayload, payloadCookieOptions);
 
       const signatureCookieOptions = {
         // secure: true,
@@ -35,7 +37,7 @@ export class TokenCookieInterceptor implements InterceptorInterface {
         sameSite: true,
       };
 
-      response.cookie(authConfig.tokenSignatureCookieName, tokenSignature, signatureCookieOptions);
+      response.cookie(cookie['token'].signature.name, tokenSignature, signatureCookieOptions);
     }
     return content;
   }

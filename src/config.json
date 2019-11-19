@@ -1,0 +1,12 @@
+{
+  "cookie": {
+    "token": {
+      "payload": {
+        "name": "token_payload"
+      },
+      "signature": {
+        "name": "token_signature"
+      }
+    }
+  }
+}

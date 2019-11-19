@@ -17,7 +17,7 @@ import sessionConfig from './config/session'
 import i18n from "i18n";
 import connectRedis from 'connect-redis';
 
-const index = express();
+const server = express();
 
 const redisStore = connectRedis(session);
 const redisClient = redis.createClient();
@@ -33,26 +33,26 @@ createConnection().then(async () => {
 
   i18n.configure(i18nConfig);
 
-  index.use(cors(corsConfig));
-  index.use(helmet());
+  server.use(cors(corsConfig));
+  server.use(helmet());
   // Use the session middleware
-  index.disable('x-powered-by');
-  index.use(session({
+  server.disable('x-powered-by');
+  server.use(session({
     ...sessionConfig,
     store: new redisStore({ host: 'localhost', port: 6379, client: redisClient, ttl: 86400 }),
   } ));
 
-  index.use(bodyParser.json());
-  index.use(bodyParser.urlencoded({ extended: true }));
-  index.use(cookieParser());
+  server.use(bodyParser.json());
+  server.use(bodyParser.urlencoded({ extended: true }));
+  server.use(cookieParser());
 
-  index.use(i18n.init);
+  server.use(i18n.init);
 
   // its important to set container before any operation you do with routing-controllers,
   // including importing controllers
   useRoutingControllersContainer(Container);
 
-  useExpressServer(index, {
+  useExpressServer(server, {
     // register created express server in routing-controllers
     development: false,
     controllers: [__dirname + "/controllers/**/*.ts"], // and configure it the way you need (controllers, validation, etc.)
@@ -76,13 +76,13 @@ createConnection().then(async () => {
 
 // true if file is executed, exclude for jest
   if (require.main === module) {
-    index.use(logger('dev'));
-    index.listen(PORT, () => {
+    server.use(logger('dev'));
+    server.listen(PORT, () => {
       console.log(`Server started on port ${PORT}!`);
     });
   }
 });
 
-export default index;
+export default server;
 
 

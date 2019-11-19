@@ -20,6 +20,6 @@
     "build"
   ],
   "files": [
-    "src/index.d.ts"
+    "src/server.d.ts"
   ]
 }

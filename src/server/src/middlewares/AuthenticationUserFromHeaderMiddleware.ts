@@ -2,7 +2,6 @@ import { Middleware, ExpressMiddlewareInterface, CurrentUser } from 'routing-con
 import {NextFunction, Request, Response} from "express";
 import { Inject } from 'typedi';
 import { UserService } from '../services/UserService';
-import authConfig from '../../config';
 import securityConfig from '../config/security';
 
 @Middleware({ type: "before", priority: 9 })

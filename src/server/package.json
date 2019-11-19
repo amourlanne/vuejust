@@ -126,9 +126,9 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src ./tests",
     "build": "webpack --config config/webpack/production.config.js",
-    "start": "ts-node-dev src/index.ts",
+    "start": "ts-node-dev src/server.ts",
     "test": "jest ./tests",
-    "serve": "ts-node src/index.ts",
+    "serve": "ts-node src/server.ts",
     "migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -n",
     "migration:up": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "migration:down": "ts-node ./node_modules/typeorm/cli.js migration:revert",
