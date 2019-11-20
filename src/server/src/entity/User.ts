@@ -5,10 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   Unique,
-  BeforeInsert,
+  BeforeInsert, OneToOne, JoinColumn,
 } from 'typeorm';
 import { IsEmail, IsEnum, IsNotEmpty, Length } from 'class-validator';
 import * as bcrypt from 'bcryptjs';
+import { Image } from './Image';
 
 export enum UserRole {
   ADMIN = 'ROLE_ADMIN',
@@ -62,6 +63,10 @@ export class User {
   @Column()
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToOne(() => Image)
+  @JoinColumn()
+  avatar: Image;
 
   @BeforeInsert()
   hashPassword() {

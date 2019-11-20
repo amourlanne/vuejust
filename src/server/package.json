@@ -4,6 +4,7 @@
   "description": "express typescript base project",
   "main": "src/server.ts",
   "readmeFilename": "README.md",
+  "private": true,
   "author": {
     "name": "Alexis Mourlanne",
     "email": "alexis.mourlanne@gmail.com"
@@ -130,8 +131,8 @@
     "test": "jest ./tests",
     "serve": "ts-node src/server.ts",
     "migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -n",
-    "migration:up": "ts-node ./node_modules/typeorm/cli.js migration:run",
-    "migration:down": "ts-node ./node_modules/typeorm/cli.js migration:revert",
+    "migration": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert",
     "fixtures": "ts-node ./node_modules/typeorm-fixtures-cli/dist/cli.js ./src/fixtures --config ormconfig.json --sync"
   },
   "babel": {

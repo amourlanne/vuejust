@@ -1,1 +1,1 @@
-# express-typeorm-vue
+# vuejust

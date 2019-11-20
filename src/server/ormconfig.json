@@ -2,23 +2,23 @@
   "type": "mariadb",
   "host": "localhost",
   "port": 3306,
-  "username": "admin",
-  "password": "admin",
-  "database": "smarts",
+  "username": "vuejust",
+  "password": "vuejust",
+  "database": "database",
   "synchronize": true,
   "logging": false,
   "entities": [
     "src/entity/**/*.ts"
   ],
   "migrations": [
-    "src/migration/**/*.ts"
+    "src/migrations/**/*.ts"
   ],
   "subscribers": [
-    "src/subscriber/**/*.ts"
+    "src/subscribers/**/*.ts"
   ],
   "cli": {
     "entitiesDir": "src/models",
-    "migrationsDir": "src/migration",
-    "subscribersDir": "src/subscriber"
+    "migrationsDir": "src/migrations",
+    "subscribersDir": "src/subscribers"
   }
 }
