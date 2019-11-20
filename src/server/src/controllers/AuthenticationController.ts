@@ -1,4 +1,4 @@
-import { User, UserRole } from '../entity/User';
+import { User } from '../entity/User';
 import { Request, Response } from 'express';
 import * as jwt from "jsonwebtoken";
 import {
@@ -8,12 +8,12 @@ import {
   Post,
   NotFoundError, Authorized, Param, Body, QueryParam, Get, Req, UseBefore,
 } from 'routing-controllers';
-import config from "../config/security";
+import security from "../../config/security";
 import { Inject } from 'typedi';
 import { UserService } from '../services/UserService';
 import { MailerService } from '../services/MailerService';
 import {AuthorizedMiddleware} from "../middlewares/AuthorizedMiddleware";
-import mailerConfig from '../config/mailer';
+import mailer from '../../config/mailer';
 import { CurrentUser } from '../middlewares/decorators/CurrentUserDecorator';
 
 @JsonController()
@@ -36,13 +36,13 @@ export class AuthenticationController {
     if(!user)
       throw new NotFoundError('Bad credentials');
 
-    request.user = user;
+    request.context.user = user;
 
     return user;
   }
 
   @Post("/signup")
-  @Authorized(UserRole.ADMIN)
+  @Authorized(security.Role.Admin)
   async signUp(@Body({ validate: true }) user: User,
                @QueryParam('sendPassword') sendPassword: boolean) {
 
@@ -52,7 +52,7 @@ export class AuthenticationController {
 
     const token = jwt.sign(
         { userId: user.id, username: user.username },
-        config.jwtAccountConfirmationSecret,
+        security.jwtAccountConfirmationSecret,
         { expiresIn: "30d" }
     );
 
@@ -81,7 +81,7 @@ export class AuthenticationController {
   @Post("/account-confirmation")
   async verification(@QueryParam('token', { required: true }) token: string) {
 
-    const user: User|undefined = await this.userService.getByToken(token, config.jwtAccountConfirmationSecret, false);
+    const user: User|undefined = await this.userService.getByToken(token, security.jwtAccountConfirmationSecret, false);
 
     if(!user)
       throw new Error('Not have account associate to this token.');
@@ -104,14 +104,14 @@ export class AuthenticationController {
 
     const token = jwt.sign(
       { userId: user.id },
-      config.jwtResetPasswordSecret,
+      security.jwtResetPasswordSecret,
       { expiresIn: "1h" }
     );
 
     let mailOptions = {
       template: 'password-reset',
       message: {
-        from: mailerConfig.emailFrom,
+        from: mailer.emailFrom,
         to: user.email,
       },
       locals: {
@@ -131,7 +131,7 @@ export class AuthenticationController {
     if (password !== confirmPassword)
       throw new Error('Password are not the same.');
 
-    const user: User|undefined = await this.userService.getByToken(token, config.jwtResetPasswordSecret);
+    const user: User|undefined = await this.userService.getByToken(token, security.jwtResetPasswordSecret);
 
     if(!user)
       throw new Error('Not have account associate to this token.');

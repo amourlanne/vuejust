@@ -142,7 +142,10 @@ export default {
           await this.$router.push(redirectUrl);
         } catch (error) {
           this.submitStatus = 'ERROR';
-          this.errorMessage = error.message;
+
+          if(error) {
+            this.errorMessage = error.message;
+          }
         }
       }
     },

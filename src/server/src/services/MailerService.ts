@@ -1,7 +1,8 @@
 import nodemailer from 'nodemailer';
-const Email = require('email-templates');
-import mailerConfig from '../config/mailer';
+import mailerConfig from '../../config/mailer';
 import { Service } from 'typedi';
+
+import Email from 'email-templates';
 
 @Service()
 export class MailerService {

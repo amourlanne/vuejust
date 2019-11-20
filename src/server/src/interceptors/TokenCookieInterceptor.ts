@@ -1,13 +1,15 @@
 import {Interceptor, InterceptorInterface, Action} from "routing-controllers";
 import * as jwt from 'jsonwebtoken';
-import securityConfig from '../config/security';
+import securityConfig from '../../config/security';
 import * as config from '../../../config.json';
 
 @Interceptor()
 export class TokenCookieInterceptor implements InterceptorInterface {
 
   intercept({ request, response } : Action, content: any) {
-    const { user } = request;
+    const { context } : Express.Request = request;
+    const { user } : Express.Context= context;
+
     if (user) {
 
       const jwtPayload = { userId: user.id, username: user.username };

@@ -10,11 +10,7 @@ import {
 import { IsEmail, IsEnum, IsNotEmpty, Length } from 'class-validator';
 import * as bcrypt from 'bcryptjs';
 import { Image } from './Image';
-
-export enum UserRole {
-  ADMIN = 'ROLE_ADMIN',
-  USER = 'ROLE_USER',
-}
+import security from '../../config/security';
 
 @Entity('users')
 @Unique(['username'])
@@ -38,12 +34,12 @@ export class User {
 
   @Column({
     type: 'enum',
-    enum: UserRole,
-    default: UserRole.USER,
+    enum: security.Role,
+    default: security.Role.User,
   })
   @IsNotEmpty()
-  @IsEnum(UserRole)
-  role: UserRole;
+  @IsEnum(security.Role)
+  role /*: security.Role*/;
 
   @Column()
   @IsNotEmpty()
@@ -60,13 +56,13 @@ export class User {
   @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
-  @UpdateDateColumn()
-  updatedAt: Date;
-
   @OneToOne(() => Image)
   @JoinColumn()
   avatar: Image;
+
+  @Column()
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   @BeforeInsert()
   hashPassword() {
@@ -74,6 +70,6 @@ export class User {
   }
 
   isAdmin() {
-    return this.role === UserRole.ADMIN;
+    return this.role === security.Role.Admin;
   }
 }

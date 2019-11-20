@@ -10,8 +10,8 @@ export class AuthorizedMiddleware implements ExpressMiddlewareInterface {
     return this.useWithRole(request, response, next,[])
   }
 
-  async useWithRole(request: Request, response: Response, next: NextFunction, roles: string[]) {
-    const { authInfo, user } = request;
+  async useWithRole({ context }: Request, response: Response, next: NextFunction, roles: string[]) {
+    const { authInfo, user } = context;
 
     try {
       if (!authInfo.token) throw new AuthenticationRequiredError();

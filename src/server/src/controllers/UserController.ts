@@ -1,5 +1,5 @@
 import { getCustomRepository, getRepository } from 'typeorm';
-import { User, UserRole } from '../entity/User';
+import { User } from '../entity/User';
 import { Request, Response } from 'express';
 import {
   Get,
@@ -15,7 +15,6 @@ import {
 import { UserRepository } from '../repository/UserRepository';
 import { Inject } from 'typedi';
 import { UserService } from '../services/UserService';
-import {FormatResponse} from "../helpers/FormatResponse";
 import { AuthorizedMiddleware } from '../middlewares/AuthorizedMiddleware';
 
 @JsonController()
@@ -26,7 +25,7 @@ export class UserController {
   private userService: UserService;
 
   @Post("/users")
-  public async httpPost(@Req() request: Request, @Res() response: FormatResponse, @Body({ validate: true }) user: User)  {
+  public async httpPost(@Req() request: Request, @Body({ validate: true }) user: User)  {
 
     const userRepository = getCustomRepository(UserRepository);
     return await userRepository.save(user);
@@ -38,7 +37,7 @@ export class UserController {
   }
 
   @Put("/users")
-  public async httpPut(@Req() request: Request, @Res() response: FormatResponse, @Body({ validate: true }) user: User)  {
+  public async httpPut(@Req() request: Request, @Body({ validate: true }) user: User)  {
     const userRepository = getCustomRepository(UserRepository);
     return await userRepository.save(user);
   }

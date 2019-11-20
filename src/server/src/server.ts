@@ -11,9 +11,9 @@ import {Container} from "typedi";
 import session from "express-session";
 
 import redis from 'redis';
-import corsConfig from './config/cors';
-import i18nConfig from './config/i18n'
-import sessionConfig from './config/session'
+import corsConfig from '../config/cors';
+import i18nConfig from '../config/i18n'
+import sessionConfig from '../config/session'
 import i18n from "i18n";
 import connectRedis from 'connect-redis';
 
@@ -60,7 +60,8 @@ createConnection().then(async () => {
     interceptors: [__dirname + "/interceptors/**/*.ts"],
     defaultErrorHandler: false, // disable default error handler, only if you have your own error handler
     authorizationChecker: async ({request} : Action, roles: string[]) => {
-      const { user } = request;
+      const { context } = request;
+      const { user } = context;
 
       if (user && !roles.length)
         return true;
