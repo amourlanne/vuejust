@@ -1,6 +1,11 @@
 import Vue from 'vue';
 import Vuelidate from 'vuelidate';
 import VueCookies from 'vue-cookies';
+
+import Vuetable from "vuetable-2/src/components/Vuetable";
+import VuetablePagination from "vuetable-2/src/components/VuetablePagination";
+import VuetablePaginationInfo from "vuetable-2/src/components/VuetablePaginationInfo";
+
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -10,7 +15,7 @@ import * as config from '../../config.json';
 import 'bootstrap';
 import '@fortawesome/fontawesome-free/js/all';
 
-import './main.scss';
+import './assets/scss/index.scss';
 
 Vue.config.productionTip = false;
 
@@ -36,6 +41,10 @@ axios.interceptors.response.use(
 
 Vue.use(Vuelidate);
 Vue.use(VueCookies);
+
+Vue.component("vuetable", Vuetable);
+Vue.component("vuetable-pagination", VuetablePagination);
+Vue.component("vuetable-pagination-info", VuetablePaginationInfo);
 
 new Vue({
   router,

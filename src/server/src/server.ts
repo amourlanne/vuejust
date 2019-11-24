@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import 'dotenv/config';
-import { createConnection, getCustomRepository, getRepository, useContainer as useTypeormContainer } from 'typeorm';
+import { createConnection, useContainer as useTypeormContainer } from 'typeorm';
 import { Action, useContainer as useRoutingControllersContainer, useExpressServer } from 'routing-controllers';
 import {Container} from "typedi";
 import session from "express-session";

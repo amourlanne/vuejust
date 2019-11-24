@@ -13,11 +13,13 @@
   "dependencies": {
     "@jnields/vue-helmet": "^3.0.0",
     "@types/jquery": "^3.3.31",
+    "@types/lodash": "^4.14.149",
     "@types/vuelidate": "^0.7.6",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.5",
     "jquery": "^3.4.1",
+    "lodash": "^4.17.15",
     "popper.js": "^1.15.0",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
@@ -28,6 +30,7 @@
     "vue-router": "^3.0.3",
     "vue-toasted": "^1.1.27",
     "vuelidate": "^0.7.4",
+    "vuetable-2": "^2.0.0-beta.4",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -98,11 +101,11 @@
     "last 2 versions"
   ],
   "prettier": {
-    "semi":  true,
-    "trailingComma":  "all",
-    "singleQuote":  true,
-    "printWidth":  120,
-    "tabWidth":  2
+    "semi": true,
+    "trailingComma": "all",
+    "singleQuote": true,
+    "printWidth": 120,
+    "tabWidth": 2
   },
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"

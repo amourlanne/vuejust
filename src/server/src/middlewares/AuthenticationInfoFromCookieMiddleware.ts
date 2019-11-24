@@ -8,7 +8,6 @@ export class AuthenticationInfoFromCookieMiddleware implements ExpressMiddleware
 
   async use(request: Request, response: Response, next: NextFunction) {
 
-
     const { cookie } = config;
 
     const tokenPayload = request.cookies[cookie['token'].payload.name];

@@ -6,6 +6,42 @@
     <div class="container">
       <div class="row">
         <div class="col">
+          <vuetable ref="vuetable"
+                    :api-mode="false"
+                    :fields="fields"
+                    :muti-sort="true"
+                    :css="css.table"
+                    :per-page="perPage"
+                    :data-manager="dataManager"
+                    pagination-path="pagination"
+                    @vuetable:pagination-data="onPaginationData"
+          >
+            <template slot="actions" slot-scope="props">
+              <div class="custom-actions">
+                <button class="btn btn-primary btn-sm"
+                        @click="onActionClicked('view-item', props.rowData, props.rowIndex)">
+                  <i class="zoom icon"></i>View
+                </button>
+                <button class="btn btn-success btn-sm"
+                        @click="onActionClicked('edit-item', props.rowData, props.rowIndex)">
+                  <i class="edit icon"></i>Edit
+                </button>
+                <button class="btn btn-danger btn-sm"
+                        @click="onActionClicked('delete-item', props.rowData, props.rowIndex)">
+                  <i class="fa fa-delete"></i>Delete
+                </button>
+              </div>
+            </template>
+
+          </vuetable>
+          <vuetable-pagination-info
+                  ref="paginationInfo">
+          </vuetable-pagination-info>
+          <vuetable-pagination
+                  ref="pagination"
+                  :css="css.pagination"
+                  @vuetable-pagination:change-page="onChangePage">
+          </vuetable-pagination>
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
             Add user
@@ -45,46 +81,6 @@
               </div>
             </div>
           </div>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">FirstName</th>
-                <th scope="col">LastName</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="user in users" :key="user.id">
-                <th scope="row">{{ user.id }}</th>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>
-                  <router-link
-                    :to="{ name: 'user', params: { username: user.username } }"
-                    :key="user.id"
-                    class="btn btn-primary"
-                    >Edit</router-link
-                  >
-                  <router-link
-                    :to="{ name: 'user', params: { username: user.username } }"
-                    :key="user.id"
-                    class="btn btn-danger"
-                    >Delete</router-link
-                  >
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="list-group">
-            <router-link
-              v-for="user in users"
-              :to="{ name: 'user', params: { username: user.username } }"
-              :key="user.id"
-              class="list-group-item list-group-item-action"
-              >{{ user.firstName }} {{ user.lastName }}</router-link
-            >
-          </div>
         </div>
       </div>
     </div>
@@ -96,22 +92,87 @@ import Vue from 'vue';
 import userService from '@/services/user.service';
 // @ts-ignore
 import { Helmet } from '@jnields/vue-helmet';
-
+import _ from 'lodash';
+import vuetableCss from "../../../../config/vuetable-css";
 export default Vue.extend({
   name: 'users',
   components: { Helmet },
   data() {
     return {
-      users: [] as Object[],
+      fields: [
+        'username',
+        'firstName',
+        'lastName',
+        'email',
+        'activated',
+        {
+          name: 'actions',
+          title: 'Actions',
+        },
+      ],
+      css: vuetableCss,
+      data: [],
+      perPage: 5
     };
+  },
+  watch: {
+    data(newVal, oldVal) {
+      // @ts-ignore
+      this.$refs.vuetable.refresh();
+    }
   },
   async beforeMount() {
     try {
-      this.users = await userService.getAll();
+      // @ts-ignore
+      this.data = await userService.getAll();
     } catch (e) {
       // console.log(e);
     }
   },
+  methods: {
+    onPaginationData(paginationData) {
+      // @ts-ignore
+      this.$refs.pagination.setPaginationData(paginationData);
+      // @ts-ignore
+      this.$refs.paginationInfo.setPaginationData(paginationData)
+    },
+    onChangePage(page) {
+      // @ts-ignore
+      this.$refs.vuetable.changePage(page);
+    },
+    dataManager(sortOrder, pagination) {
+      if (this.data.length < 1) return;
+
+      let local = this.data;
+
+      // sortOrder can be empty, so we have to check for that as well
+      if (sortOrder.length > 0) {
+        // @ts-ignore
+        local = _.orderBy(
+                local,
+                sortOrder[0].sortField,
+                sortOrder[0].direction
+        );
+      }
+// @ts-ignore
+      pagination = this.$refs.vuetable.makePagination(
+              local.length,
+              this.perPage
+      );
+      console.log('pagination:', pagination)
+      let from = pagination.from - 1;
+      let to = from + this.perPage;
+
+      return {
+        pagination: pagination,
+        // @ts-ignore
+        data: _.slice(local, from, to)
+      };
+    },
+    onActionClicked(action, data, rowIndex) {
+      console.log("slot actions: on-click", action, data, rowIndex);
+    }
+  }
 });
 </script>
 
