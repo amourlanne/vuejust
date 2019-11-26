@@ -26,7 +26,7 @@ form {
     display: none;
   }
   .form-group-error {
-    + .form-error {
+    .form-error {
       display: block;
     }
   }
