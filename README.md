@@ -55,7 +55,7 @@ yarn # ou 'npm install'
 docker-compose up -d --build
 ```
 ### Lancer les applications en developpement
-Lancer l'API dans `src/server` l'application utilisateur dans `src/app`
+Lancer l'API dans `src/server` et l'application utilisateur dans `src/app`
 ```bash
 yarn start
 ```
