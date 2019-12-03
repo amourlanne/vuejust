@@ -12,7 +12,6 @@ import security from "../../config/security";
 import { Inject } from 'typedi';
 import { UserService } from '../services/UserService';
 import { MailerService } from '../services/MailerService';
-import {AuthorizedMiddleware} from "../middlewares/AuthorizedMiddleware";
 import mailer from '../../config/mailer';
 import { CurrentUser } from '../middlewares/decorators/CurrentUserDecorator';
 
@@ -142,12 +141,6 @@ export class AuthenticationController {
     await this.userService.save(user);
 
     return "Password succefully changed."
-  }
-
-  @Get("/account")
-  @UseBefore(AuthorizedMiddleware)
-  public async httpGetAccount(@CurrentUser({ required: true }) user: User)  {
-    return user;
   }
 
   @Get("/authenticate")

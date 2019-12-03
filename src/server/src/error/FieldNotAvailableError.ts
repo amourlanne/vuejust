@@ -1,11 +1,11 @@
 import { CustomHttpError } from './CustomHttpError';
 
-export class AccessDeniedError extends CustomHttpError {
-  constructor() {
+export class FieldNotAvailableError extends CustomHttpError {
+  constructor(name: string, value: string) {
     super(
-      403,
-      'Access denied',
-      'You may not have the appropriate permissions to access the resource',
+      422,
+      'Field not available',
+      `${name.charAt(0).toUpperCase() + name.slice(1)} ${value} is not available.`,
     );
   }
 }

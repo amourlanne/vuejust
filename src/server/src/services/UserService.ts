@@ -2,7 +2,8 @@ import { Inject, Service } from 'typedi';
 import { User } from '../entity/User';
 import { UserRepository } from '../repository/UserRepository';
 import { InjectRepository } from 'typeorm-typedi-extensions';
-import { FindConditions, ObjectLiteral } from 'typeorm';
+import { FindConditions, Not, ObjectLiteral } from 'typeorm';
+import { FieldNotAvailableError } from '../error/FieldNotAvailableError';
 
 @Service()
 export class UserService {
@@ -45,12 +46,13 @@ export class UserService {
     return this.userRepository.findByToken(token, jwtSecret, onlyActivated ? {activated: true} : {});
   }
 
-  public save(user: User): Promise<User> {
+  public async save(user: User): Promise<User> {
+    if( await this.userRepository.findOne({ where: { email: user.email, id: Not(user.id) } })) {
+      throw new FieldNotAvailableError('email', user.email)
+    }
     return this.userRepository.save(user);
   }
 
-  // public delete(id: string): Promise<void> {
-  //   return this.userRepository.removeById(id);
-  // }
-
 }
+
+

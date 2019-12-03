@@ -1,23 +1,23 @@
 import { User } from '../entity/User';
-import { Request, Response } from 'express';
-import * as jwt from "jsonwebtoken";
 import {
   JsonController,
   Res,
   BodyParam,
   Post,
-  NotFoundError, Authorized, Param, Body, QueryParam, Get, Req, UseBefore,
+  NotFoundError, Authorized, Param, Body, QueryParam, Get, Req, UseBefore, UploadedFile,
 } from 'routing-controllers';
-import security from "../../config/security";
 import { Inject } from 'typedi';
 import { UserService } from '../services/UserService';
 import { MailerService } from '../services/MailerService';
 import {AuthorizedMiddleware} from "../middlewares/AuthorizedMiddleware";
-import mailer from '../../config/mailer';
 import { CurrentUser } from '../middlewares/decorators/CurrentUserDecorator';
+import fileUploadOptions from '../../config/multer'
 
-@JsonController()
-export class AuthenticationController {
+import multer from 'multer';
+
+@UseBefore(AuthorizedMiddleware)
+@JsonController('/account')
+export class AccountController {
 
   @Inject()
   private userService: UserService;
@@ -25,142 +25,25 @@ export class AuthenticationController {
   @Inject()
   private mailerService: MailerService;
 
-  @Post("/login")
-  async login(@Req() request: Request,
-              @Res() response: Response,
-              @BodyParam("username", { required: true }) username: string,
-              @BodyParam("password", { required: true }) password: string ) {
-
-    const user = await this.userService.getByLogs(username, password);
-
-    if(!user)
-      throw new NotFoundError('Bad credentials');
-
-    request.context.user = user;
-
-    return user;
-  }
-
-  @Post("/signup")
-  @Authorized(security.Role.Admin)
-  async signUp(@Body({ validate: true }) user: User,
-               @QueryParam('sendPassword') sendPassword: boolean) {
-
-    const password = user.password;
-
-    await this.userService.save(user);
-
-    const token = jwt.sign(
-        { userId: user.id, username: user.username },
-        security.jwtAccountConfirmationSecret,
-        { expiresIn: "30d" }
-    );
-
-    let mailOptions = {
-      template: 'welcome-onboard',
-      message: {
-        from: 'Alexis Mourlanne <alexis.mourlanne@gmail.com>',
-        to: user.email,
-      },
-      locals: {
-        userName: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        token: token,
-        password: sendPassword ? password : '*'.repeat(password.length)
-      }
-    };
-
-    await this.mailerService.sendMail(mailOptions);
-
-    delete user.password;
-
-    return user;
-  }
-
-  @Post("/account-confirmation")
-  async verification(@QueryParam('token', { required: true }) token: string) {
-
-    const user: User|undefined = await this.userService.getByToken(token, security.jwtAccountConfirmationSecret, false);
-
-    if(!user)
-      throw new Error('Not have account associate to this token.');
-
-    if(!user.activated) {
-      user.activated = true;
-      await this.userService.save(user);
-    }
-
-    return user;
-  }
-
-  @Post("/password-reset")
-  async passwordReset(@QueryParam("email", { required: true }) email: string) {
-
-    const user: User|undefined = await this.userService.getOne({email});
-
-    if(!user)
-      return;
-
-    const token = jwt.sign(
-      { userId: user.id },
-      security.jwtResetPasswordSecret,
-      { expiresIn: "1h" }
-    );
-
-    let mailOptions = {
-      template: 'password-reset',
-      message: {
-        from: mailer.emailFrom,
-        to: user.email,
-      },
-      locals: {
-        userName: user.username,
-        token: token
-      }
-    };
-    const {response} = await this.mailerService.sendMail(mailOptions);
-    return response;
-  }
-
-  @Post("/password-reset/confirmation")
-  async passwordResetConfirmation(@QueryParam('token', { required: true }) token: string,
-                                  @BodyParam('password', { required: true }) password: string,
-                                  @BodyParam('confirmPassword', { required: true }) confirmPassword : string) {
-
-    if (password !== confirmPassword)
-      throw new Error('Password are not the same.');
-
-    const user: User|undefined = await this.userService.getByToken(token, security.jwtResetPasswordSecret);
-
-    if(!user)
-      throw new Error('Not have account associate to this token.');
-
-    user.password = password;
-    user.hashPassword();
-
-    await this.userService.save(user);
-
-    return "Password succefully changed."
-  }
-
-  @Get("/account")
-  @UseBefore(AuthorizedMiddleware)
+  @Get()
   public async httpGetAccount(@CurrentUser({ required: true }) user: User)  {
     return user;
   }
 
-  @Pos("/account")
-  @UseBefore(AuthorizedMiddleware)
-  public async httpGetAccount(@CurrentUser({ required: true }) user: User)  {
-    return user;
+  @Post("/profile")
+  public async httpPostAccountProfile(
+    @CurrentUser({ required: true }) user: User,
+    @BodyParam('firstName') firstName: string,
+    @BodyParam('lastName') lastName: string,
+    @BodyParam('email') email: string,
+    @UploadedFile("avatar", { options: fileUploadOptions }) avatar: any
+  )  {
+    console.log("avatar", avatar);
+    return this.userService.save(Object.assign(user,{ firstName, lastName, email }));
   }
 
-  @Get("/authenticate")
-  public async authenticate(@CurrentUser() user?: User) {
-    return {
-      authenticate: typeof user !== 'undefined',
-      user: user
-    };
+  @Post("/password")
+  public async httpPostAccountPassword(@CurrentUser({ required: true }) user: User)  {
+    return user;
   }
 }
