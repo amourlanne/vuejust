@@ -33,7 +33,7 @@ La base de données ([MariaDB](https://mariadb.org/) + PHPMyAdmin), le serveur d
 
 ## Installation
 
-#### Récuperer le depot
+#### Récuperer le dépôt
 ```git
 git clone git@github.com:amourlanne/vuejust.git
 ```
@@ -46,6 +46,8 @@ yarn # ou 'npm install'
 ```
 
 ## Configuration
+Les applicatifs docker se configurent dans le fichier `.env` à la racine du dépôt.
+La configuration de l'ORM se fait dans le fichier `ormconfig.json` dans `src/server`.
 
 ## Utilisation
 
