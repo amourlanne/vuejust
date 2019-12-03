@@ -91,7 +91,7 @@ yarn fixtures # ou npm run fixtures
 Lancer les tests de l'API dans `src/server` et de l'application utilisateur dans `src/app`
 
 ```bash
-yarn test
+yarn test # ou npm run test
 ```
 
 ## Technologies
