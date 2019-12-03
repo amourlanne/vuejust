@@ -20,12 +20,9 @@
 <script lang="ts">
 import Vue from 'vue';
 import userService from '@/services/user.service';
-// @ts-ignore
-import { Helmet } from '@jnields/vue-helmet';
 
 export default Vue.extend({
   name: 'user',
-  components: { Helmet },
   data() {
     return {
       currentUser: null as null | Object,

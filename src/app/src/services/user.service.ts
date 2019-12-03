@@ -49,6 +49,24 @@ export default {
         });
     });
   },
+  updateAccountProfile( profile ) {
+    let formData = new FormData();
+    formData.append('firstName', profile.firstName);
+    formData.append('lastName', profile.lastName);
+    formData.append('email', profile.email);
+    formData.append('avatar', profile.avatar);
+
+    return new Promise<Object>((resolve, reject) => {
+      axios
+        .post(`/account/profile`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+        .then(response => {
+          resolve(response.data);
+        })
+        .catch(error => {
+          reject(error.response.data.error);
+        });
+    });
+  },
 };
 
 // add client

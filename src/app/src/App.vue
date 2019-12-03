@@ -11,27 +11,15 @@
 
 <script lang="ts">
 import Vue from 'vue';
-// @ts-ignore
-import { Helmet, HelmetProvider } from '@jnields/vue-helmet';
+import { HelmetProvider } from '@jnields/vue-helmet';
 
 export default Vue.extend({
   name: 'app',
-  components: { Helmet, HelmetProvider },
+  components: {
+    'helmet-provider': HelmetProvider
+  },
 });
 </script>
 
 <style lang="scss">
-form {
-  .form-error {
-    display: none;
-  }
-  .form-group-error {
-    .form-error {
-      display: block;
-    }
-  }
-  .dropdown-item-action {
-    cursor: pointer;
-  }
-}
 </style>

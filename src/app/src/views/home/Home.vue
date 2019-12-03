@@ -8,14 +8,12 @@
 
 <script>
 import Vue from 'vue';
-import LocaleChanger from '../../components/LocaleChanger';
 import { mapState } from 'vuex';
-import { Helmet } from '@jnields/vue-helmet';
 import HomeHeader from './HomeHeader';
 
 export default Vue.extend({
   name: 'home',
-  components: { Helmet, HomeHeader },
+  components: { HomeHeader },
   data: () => ({}),
   computed: mapState(['authUser']),
   validations: {},

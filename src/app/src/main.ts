@@ -2,9 +2,7 @@ import Vue from 'vue';
 import Vuelidate from 'vuelidate';
 import VueCookies from 'vue-cookies';
 
-import Vuetable from "vuetable-2/src/components/Vuetable";
-import VuetablePagination from "vuetable-2/src/components/VuetablePagination";
-import VuetablePaginationInfo from "vuetable-2/src/components/VuetablePaginationInfo";
+import { Helmet } from '@jnields/vue-helmet';
 
 import App from './App.vue';
 import router from './router';
@@ -42,9 +40,7 @@ axios.interceptors.response.use(
 Vue.use(Vuelidate);
 Vue.use(VueCookies);
 
-Vue.component("vuetable", Vuetable);
-Vue.component("vuetable-pagination", VuetablePagination);
-Vue.component("vuetable-pagination-info", VuetablePaginationInfo);
+Vue.component("helmet", Helmet);
 
 new Vue({
   router,

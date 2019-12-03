@@ -10,21 +10,26 @@
           <small>Your email address is your identity on vuejust and is used to log in.</small>
         </div>
         <div class="col">
-          <form @submit.prevent="submit">
+          <form @submit.prevent="submitProfile">
+            <div class="alert alert-danger" role="alert" v-if="profileSubmitStatus === 'ERROR'">
+              {{ profileErrorMessage }}
+            </div>
+            <div class="alert alert-success" role="alert" v-if="profileSubmitStatus === 'OK'">
+              Profile successfully updated !
+            </div>
             <div class="form-row mb-5">
               <div class="col-3 mr-5">
-                <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-                     width="180" class="rounded-circle img-fluid" alt="Cinque Terre">
+                <img :src="avatarUrl || defaultAvatarUrl" style="width: 180px; height: 180px;" class="rounded-circle img-fluid">
               </div>
               <div class="col-5">
                 <label>Upload new avatar</label>
                 <div class="custom-file mb-2">
-                  <input type="file" class="custom-file-input" id="customFile">
-                  <label class="custom-file-label" for="customFile">Choose file</label>
+                  <input type="file" class="custom-file-input" id="avatar" name="avatar" @change="handleFileUpload">
+                  <label class="custom-file-label" for="avatar">Choose file</label>
                 </div>
                 <div>The maximum file size allowed is 200KB.</div>
                 <hr/>
-                <button type="button" class="btn btn-outline-danger">Remove avatar</button>
+                <button type="button" class="btn btn-outline-danger" ref="avatar" v-on:click="onClickRemoveAvatar">Remove avatar</button>
               </div>
             </div>
             <hr/>
@@ -84,10 +89,9 @@
       <div class="row">
         <div class="col-3">
           <div>Password</div>
-          <small>...</small>
         </div>
         <div class="col">
-          <form @submit.prevent="submit">
+          <form @submit.prevent="submitPassword">
             <div class="form-row">
               <div :class="{ 'col-md-8 mb-3': true, 'form-group-error': $v.password.currentPassword.$error }">
                 <label for="currentPassword">Current Password</label>
@@ -129,8 +133,8 @@
                        placeholder="enter the password again"
                        type="text"
                        v-model.trim="$v.password.repeatNewPassword.$model"/>
-                <small class="form-error form-text text-danger" v-if="!$v.password.repeatNewPassword.required">
-                  {{ $t('form.validation.required') }}
+                <small class="form-error form-text text-danger" v-if="!$v.password.repeatNewPassword.sameAsPassword">
+                  {{ $t('form.validation.sameAsPassword') }}
                 </small>
               </div>
             </div>
@@ -145,18 +149,22 @@
 
 <script>
 import { mapState } from 'vuex';
-import { Helmet } from '@jnields/vue-helmet';
-import { required, email, minLength } from 'vuelidate/lib/validators';
+import { required, email, minLength, sameAs } from 'vuelidate/lib/validators';
+import userService from '../../../services/user.service';
 
 export default {
   name: 'account',
-  components: { Helmet },
   data: () => ({
     profile: {
       firstName: null,
       lastName: null,
-      email: null
+      email: null,
+      avatar: null
     },
+    avatarUrl: null,
+    defaultAvatarUrl: "https://secure.gravatar.com/avatar/2615a3a7473379de6863858e0ec7b32a?s=800&d=identicon",
+    profileSubmitStatus: null,
+    profileErrorMessage: null,
     password: {
       currentPassword: null,
       newPassword: null,
@@ -186,15 +194,29 @@ export default {
         minLength: minLength(8)
       },
       repeatNewPassword: {
-        required,
+        sameAsPassword: sameAs('newPassword')
       }
     }
   },
   methods: {
-    async submit() {
-      this.$v.$touch();
-      if (!this.$v.$invalid) {
-        console.log(this.profile);
+    async submitProfile() {
+      this.$v.profile.$touch();
+      if (!this.$v.profile.$invalid) {
+        try {
+          const user = await userService.updateAccountProfile(this.profile);
+          this.profileSubmitStatus = 'OK';
+          this.$store.commit('set_current_user', { currentUser: user });
+        } catch (error) {
+          this.profileSubmitStatus = 'ERROR';
+          if(error) {
+            this.profileErrorMessage = error.message;
+          }
+        }
+      }
+    },
+    async submitPassword() {
+      this.$v.password.$touch();
+      if (!this.$v.password.$invalid) {
         try {
         } catch (error) {
           if(error) {
@@ -202,6 +224,15 @@ export default {
         }
       }
     },
+    async handleFileUpload(event) {
+      console.log(this.refs.avatar);
+      this.profile.avatar = event.target.files[0];
+      this.avatarUrl = URL.createObjectURL(this.profile.avatar);
+    },
+    async onClickRemoveAvatar(event) {
+      this.profile.avatar = null;
+      this.avatarUrl = null;
+    }
   },
   async beforeMount() {
     const {

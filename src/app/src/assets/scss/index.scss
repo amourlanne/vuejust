@@ -1,2 +1,16 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
+
+form {
+  .form-error {
+    display: none;
+  }
+  .form-group-error {
+    .form-error {
+      display: block;
+    }
+  }
+  .dropdown-item-action {
+    cursor: pointer;
+  }
+}
