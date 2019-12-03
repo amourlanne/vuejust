@@ -1,34 +1,35 @@
 # VueJust
 
-VueJust est une application web implémentant différentes fonctionnalités de base. VueJust s'apparentant à un mini-framework.
+VueJust est une application web implémentant différentes fonctionnalités de base. VueJust s'apparente à un mini-framework.
 
 VueJust contient les fonctionnalités suivantes:
 - Gestion utilisateur
     - authentification [à double cookies](https://medium.com/lightrail/getting-token-authentication-right-in-a-stateless-single-page-application-57d0c6474e3)
     - création de compte (confirmation par email)
     - récupération de mot de passe
-    - autorisation aux pages et ressources par rôle utilisateur
+    - autorisation (pages et ressources) par rôle utilisateur
 - Multilingue
     - multilingue application (intégré ou non au système de routes)
     - multilingue API (messages d'erreurs etc ...)
 - Fixtures
 - Environnement de développement (Hot reloading)
+- Tests
 
 ## Architecture
-Le projet est composé d'une API node.js utilisant le framework express.js et d'une application utilisateur utilisant Vue.js.
+Le projet est composé d'une API [Node.js](https://nodejs.org/en/) utilisant le framework [express.js](https://expressjs.com/fr/) et d'une application utilisateur utilisant [Vue.js](https://vuejs.org/).
 
-La base de données (MariaDB + PHPMyAdmin), le serveur de mail (Maildev) et le serveur de sessions (Redis) se mettent en place à l'aide de docker et nottament du fichier docker-compose.
+La base de données ([MariaDB](https://mariadb.org/) + PHPMyAdmin), le serveur de mail ([maildev](https://github.com/maildev/maildev)) et le serveur de sessions ([Redis](https://redis.io/)) se mettent en place à l'aide de docker et nottament du fichier docker-compose.
 
 ```
 ├── src 
-│   ├── app (application Vue.js)
+│   ├── app (application utilisateur Vue.js)
 │   └── server (API express.js)
 ├── .env
 └── docker-compose.yaml
 ```
 ## Pre-requis
 - votre gestionnaire de paquets preferré ([yarn](https://yarnpkg.com/lang/fr/) ou [npm](https://www.npmjs.com/))
-- [Docker](https://www.docker.com/) ou (base de données MariaDB + serveur de mail Redis + serveur redis)
+- [Docker](https://www.docker.com/) ou (base de données + serveur de mail)
 
 ## Installation
 
@@ -86,6 +87,12 @@ yarn fixtures # ou npm run fixtures
 ```
 
 ### Tests
+
+Lancer les tests de l'API dans `src/server` et de l'application utilisateur dans `src/app`
+
+```bash
+yarn test
+```
 
 ## Technologies
 
