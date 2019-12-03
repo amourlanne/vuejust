@@ -77,7 +77,7 @@ yarn migration:generate 'migration-name' # ou npm run migration:generate 'migrat
 #### Lancer les migrations
 
 ```bash
-yarn migrations # ou npm run migration
+yarn migration # ou npm run migration
 ```
 
 ### Fixtures
