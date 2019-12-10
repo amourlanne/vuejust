@@ -4,9 +4,9 @@
     "module": "commonjs",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+//      "@/*": [
+//        "src/*"
+//      ]
     },
     "typeRoots": [
       "node_modules/@types"

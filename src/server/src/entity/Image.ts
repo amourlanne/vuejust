@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeRemove, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity("images")
 export class Image {
@@ -7,5 +7,22 @@ export class Image {
   id: string;
 
   @Column()
-  url: string;
+  path: string;
+
+  @Column()
+  originalName: string;
+
+  @Column()
+  fileName: string;
+
+  @Column()
+  mimeType: string;
+
+  @Column()
+  size: number;
+
+  @BeforeRemove()
+  removeFile() {
+    console.log("before remove");
+  }
 }

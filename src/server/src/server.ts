@@ -48,6 +48,8 @@ createConnection().then(async () => {
 
   server.use(i18n.init);
 
+  server.use(express.static('public'));
+
   // its important to set container before any operation you do with routing-controllers,
   // including importing controllers
   useRoutingControllersContainer(Container);

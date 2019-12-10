@@ -24,12 +24,12 @@
               <div class="col-5">
                 <label>Upload new avatar</label>
                 <div class="custom-file mb-2">
-                  <input type="file" class="custom-file-input" id="avatar" name="avatar" @change="handleFileUpload">
+                  <input type="file" class="custom-file-input" ref="avatar" id="avatar" name="avatar" v-on:change="handleFileUpload">
                   <label class="custom-file-label" for="avatar">Choose file</label>
                 </div>
                 <div>The maximum file size allowed is 200KB.</div>
                 <hr/>
-                <button type="button" class="btn btn-outline-danger" ref="avatar" v-on:click="onClickRemoveAvatar">Remove avatar</button>
+                <button type="button" class="btn btn-outline-danger" v-on:click="onClickRemoveAvatar">Remove avatar</button>
               </div>
             </div>
             <hr/>
@@ -224,12 +224,13 @@ export default {
         }
       }
     },
-    async handleFileUpload(event) {
-      console.log(this.refs.avatar);
-      this.profile.avatar = event.target.files[0];
-      this.avatarUrl = URL.createObjectURL(this.profile.avatar);
+    async handleFileUpload() {
+      const avatar = this.$refs.avatar.files[0];
+      this.profile.avatar = avatar;
+      this.avatarUrl = URL.createObjectURL(avatar);
     },
-    async onClickRemoveAvatar(event) {
+    async onClickRemoveAvatar() {
+      this.$refs.avatar.files[0].file = null;
       this.profile.avatar = null;
       this.avatarUrl = null;
     }
@@ -238,7 +239,8 @@ export default {
     const {
       firstName,
       lastName,
-      email
+      email,
+      avatar
     } = this.currentUser;
 
     this.profile = {
@@ -246,6 +248,10 @@ export default {
       lastName,
       email
     };
+
+    if(avatar) {
+      this.avatarUrl = avatar.path;
+    }
   },
 };
 </script>

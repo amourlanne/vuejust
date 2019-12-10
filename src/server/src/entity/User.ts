@@ -56,9 +56,12 @@ export class User {
   @CreateDateColumn()
   createdAt: Date;
 
-  @OneToOne(() => Image)
+  @OneToOne(() => Image, {
+    cascade: true,
+    eager: true,
+  })
   @JoinColumn()
-  avatar: Image;
+  avatar: Image | null;
 
   @Column()
   @UpdateDateColumn()
