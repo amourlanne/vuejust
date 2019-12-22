@@ -9,7 +9,7 @@ export default {
           resolve(response.data);
         })
         .catch(error => {
-          reject(error.response.data.error);
+          reject(error.response ? error.response.data.error : error);
         });
     });
   },
@@ -50,11 +50,16 @@ export default {
     });
   },
   updateAccountProfile( profile ) {
+
     let formData = new FormData();
+
     formData.append('firstName', profile.firstName);
     formData.append('lastName', profile.lastName);
     formData.append('email', profile.email);
-    formData.append('avatar', profile.avatar);
+
+    if(typeof profile.avatar !== 'undefined') {
+      formData.append('avatar', profile.avatar);
+    }
 
     return new Promise<Object>((resolve, reject) => {
       axios

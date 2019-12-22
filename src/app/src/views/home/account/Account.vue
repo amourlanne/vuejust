@@ -159,7 +159,8 @@ export default {
       firstName: null,
       lastName: null,
       email: null,
-      avatar: null
+      avatar: null,
+      "remove-avatar": false
     },
     avatarUrl: null,
     defaultAvatarUrl: "https://secure.gravatar.com/avatar/2615a3a7473379de6863858e0ec7b32a?s=800&d=identicon",
@@ -230,7 +231,6 @@ export default {
       this.avatarUrl = URL.createObjectURL(avatar);
     },
     async onClickRemoveAvatar() {
-      this.$refs.avatar.files[0].file = null;
       this.profile.avatar = null;
       this.avatarUrl = null;
     }

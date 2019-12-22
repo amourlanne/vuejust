@@ -7,7 +7,6 @@
             <div class="card-body">
               <locale-changer></locale-changer>
               <h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
-              <hr />
               <p class="text-success text-center" v-if="submitStatus === 'OK'">
                 Thanks for your submission!
               </p>
@@ -20,20 +19,13 @@
               </p>
               <form @submit.prevent="submit">
                 <div class="form-group">
+                  <label>Username or Email</label>
                   <div
-                    :class="{
-                      'input-group': true,
-                      'form-group-error': $v.username.$error,
-                    }"
+                    class="input-group"
                   >
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fa fa-user"></i>
-                      </span>
-                    </div>
                     <input
+                      :class="['form-control', {'is-invalid': $v.username.$error}] "
                       name=""
-                      class="form-control"
                       placeholder="Username or email"
                       type="text"
                       v-model.trim="$v.username.$model"
@@ -48,17 +40,13 @@
                   </small>
                 </div>
                 <div class="form-group">
+                  <label>Password</label>
                   <div
                     :class="{
                       'input-group': true,
                       'form-group-error': $v.password.$error,
                     }"
                   >
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fa fa-lock"></i>
-                      </span>
-                    </div>
                     <input
                       class="form-control"
                       placeholder="Password"
@@ -74,7 +62,7 @@
                   <input type="checkbox" class="form-check-input" />
                   <label class="form-check-label">Remember me</label>
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-5">
                   <button type="submit" class="btn btn-primary btn-block" :disabled="submitStatus === 'PENDING'">
                     Sign in
                   </button>
