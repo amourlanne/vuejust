@@ -97,7 +97,7 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-1.2.0.tgz#63ce3638cb85231f3704164c90a18ef816da3fb7"
   integrity sha512-mwhXGkRV5dlvQc4EgPDxDxO6WuMBVymGFd1CA+2Y+z5dG9MNspoQ+AWjl/Ld1MnpCL8AKbosZlDVohqcIwuWsw==
 
-"@tsed/common@5.36.1", "@tsed/common@^5.35.2":
+"@tsed/common@5.36.1", "@tsed/common@^5.36.1":
   version "5.36.1"
   resolved "https://registry.yarnpkg.com/@tsed/common/-/common-5.36.1.tgz#3b957fab2a1282874079ac9b8c84637f5600011b"
   integrity sha512-KISh4e+RQwwB0S32PngExeLDuIyPiS1UZZ9xY1GLaQd6EoFZ9BU4Sdw89/T7qz2BWgqwtqtItmGzDgW/oPjMqQ==
@@ -114,7 +114,7 @@
     tslib "1.10.0"
     uuid "3.3.3"
 
-"@tsed/core@5.36.1", "@tsed/core@^5.35.2":
+"@tsed/core@5.36.1", "@tsed/core@^5.36.1":
   version "5.36.1"
   resolved "https://registry.yarnpkg.com/@tsed/core/-/core-5.36.1.tgz#ad38d614a7440b9933851bfbc770b39e463d7382"
   integrity sha512-+HMPwJ6HIP3JEufwhta2gxUH0Ms/dcZkH6ueDk3Q43OnGKldRjiyeQKBBOhj+3RRqyUmXcUHOyBm8gWVugrKyg==
@@ -123,7 +123,7 @@
     source-map-support "0.5.16"
     tslib "1.10.0"
 
-"@tsed/di@5.36.1", "@tsed/di@^5.35.2":
+"@tsed/di@5.36.1", "@tsed/di@^5.36.1":
   version "5.36.1"
   resolved "https://registry.yarnpkg.com/@tsed/di/-/di-5.36.1.tgz#fc49fadecb2af4ba0c6704a77d617a030377edac"
   integrity sha512-Z/5Vk32aN/m3R2hQWmX66AZi9GcNe3YCv6qGURc1g5hYt/xDyPhBup2SUzebpBTelY2uf3UVmxSHOi9jOdEstw==
@@ -131,7 +131,7 @@
     "@tsed/core" "5.36.1"
     tslib "1.10.0"
 
-"@tsed/swagger@^5.35.2":
+"@tsed/swagger@^5.36.1":
   version "5.36.1"
   resolved "https://registry.yarnpkg.com/@tsed/swagger/-/swagger-5.36.1.tgz#c44f0415444e25c1545aa7c3bc0ebe423c68ac88"
   integrity sha512-f3xkS76uWjAttAlJIMNpHm4RhkU5v2PMHj5gJ/rxMyRtIZ06vgPY8oA2suibveazpG3M7AdtGb87NgNvGaMdTQ==
@@ -141,7 +141,7 @@
     swagger-ui-dist "3.24.3"
     tslib "1.10.0"
 
-"@tsed/testing@^5.35.2":
+"@tsed/testing@^5.36.1":
   version "5.36.1"
   resolved "https://registry.yarnpkg.com/@tsed/testing/-/testing-5.36.1.tgz#7637474d560e5eba4179da0077a8832bbfc7bcb7"
   integrity sha512-OW67aq9kZtMcSTemprvEUa+Tu/b0Ct0QagTxERcrtEz6GB6yTklfkLC4ogz/b47hLDKQTjmoHgdhBqw+IgUC5g==
