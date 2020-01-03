@@ -10,7 +10,7 @@ import methodOverride from "method-override";
 import cors from "cors";
 import helmet from 'helmet';
 import config from '../config';
-import UserContextMiddleware from './middlewares/UserContextMiddleware';
+import UserContextMiddleware from './Middlewares/UserContextMiddleware';
 
 @ServerSettings(config.server)
 export class Server extends ServerLoader {

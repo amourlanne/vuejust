@@ -1,5 +1,5 @@
 import { Email, Enum, MaxLength, MinLength, Property, Required } from '@tsed/common';
-import { GenderEnum } from '../../enums/GenderEnum';
+import { GenderEnum } from '../../Enums/GenderEnum';
 
 export class UserType {
 

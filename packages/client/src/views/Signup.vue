@@ -28,17 +28,17 @@
                       Username
                     </label>
                     <div
-                            :class="{
-                      'input-group': true,
-                      'form-group-error': $v.formData.username.$error,
-                    }"
+                      :class="{
+                        'input-group': true,
+                        'form-group-error': $v.formData.username.$error,
+                      }"
                     >
                       <input
-                              name=""
-                              class="form-control"
-                              placeholder="Username"
-                              type="text"
-                              v-model.trim="$v.formData.username.$model"
+                        name=""
+                        class="form-control"
+                        placeholder="Username"
+                        type="text"
+                        v-model.trim="$v.formData.username.$model"
                       />
                     </div>
                     <small class="form-error form-text text-danger" v-if="!$v.formData.username.required">
@@ -54,17 +54,17 @@
                       Email address
                     </label>
                     <div
-                            :class="{
-                      'input-group': true,
-                      'form-group-error': $v.formData.email.$error,
-                    }"
+                      :class="{
+                        'input-group': true,
+                        'form-group-error': $v.formData.email.$error,
+                      }"
                     >
                       <input
-                              name=""
-                              class="form-control"
-                              placeholder="Email address"
-                              type="text"
-                              v-model.trim="$v.formData.email.$model"
+                        name=""
+                        class="form-control"
+                        placeholder="Email address"
+                        type="text"
+                        v-model.trim="$v.formData.email.$model"
                       />
                     </div>
                     <small class="form-error form-text text-danger" v-if="!$v.formData.email.required">
@@ -81,17 +81,17 @@
                           First Name
                         </label>
                         <div
-                                :class="{
-                          'input-group': true,
-                          'form-group-error': $v.formData.firstName.$error,
-                        }"
+                          :class="{
+                            'input-group': true,
+                            'form-group-error': $v.formData.firstName.$error,
+                          }"
                         >
                           <input
-                                  name=""
-                                  class="form-control"
-                                  placeholder="First Name"
-                                  type="text"
-                                  v-model.trim="$v.formData.firstName.$model"
+                            name=""
+                            class="form-control"
+                            placeholder="First Name"
+                            type="text"
+                            v-model.trim="$v.formData.firstName.$model"
                           />
                         </div>
                         <small class="form-error form-text text-danger" v-if="!$v.formData.firstName.required">
@@ -103,17 +103,17 @@
                           Last Name
                         </label>
                         <div
-                                :class="{
-                          'input-group': true,
-                          'form-group-error': $v.formData.lastName.$error,
-                        }"
+                          :class="{
+                            'input-group': true,
+                            'form-group-error': $v.formData.lastName.$error,
+                          }"
                         >
                           <input
-                                  name=""
-                                  class="form-control"
-                                  placeholder="Last Name"
-                                  type="text"
-                                  v-model.trim="$v.formData.lastName.$model"
+                            name=""
+                            class="form-control"
+                            placeholder="Last Name"
+                            type="text"
+                            v-model.trim="$v.formData.lastName.$model"
                           />
                         </div>
                         <small class="form-error form-text text-danger" v-if="!$v.formData.lastName.required">
@@ -130,7 +130,13 @@
                     <div class="form-row">
                       <div class="col">
                         <label class="d-block cursor-pointer m-0">
-                          <input type="radio" name="gender" class="d-none" value="male" v-model.trim="$v.formData.gender.$model"/>
+                          <input
+                            type="radio"
+                            name="gender"
+                            class="d-none"
+                            value="male"
+                            v-model.trim="$v.formData.gender.$model"
+                          />
                           <div class="card">
                             <div class="card-body p-2">
                               <p class="card-text text-center">Male</p>
@@ -140,7 +146,13 @@
                       </div>
                       <div class="col">
                         <label class="d-block cursor-pointer m-0">
-                          <input type="radio" name="gender" class="d-none" value="female" v-model.trim="$v.formData.gender.$model"/>
+                          <input
+                            type="radio"
+                            name="gender"
+                            class="d-none"
+                            value="female"
+                            v-model.trim="$v.formData.gender.$model"
+                          />
                           <div class="card">
                             <div class="card-body p-2">
                               <p class="card-text text-center">Female</p>
@@ -151,7 +163,13 @@
 
                       <div class="col">
                         <label class="d-block cursor-pointer m-0">
-                          <input type="radio" name="gender" class="d-none" value="other" v-model.trim="$v.formData.gender.$model"/>
+                          <input
+                            type="radio"
+                            name="gender"
+                            class="d-none"
+                            value="other"
+                            v-model.trim="$v.formData.gender.$model"
+                          />
                           <div class="card">
                             <div class="card-body p-2">
                               <p class="card-text text-center">Other</p>
@@ -163,8 +181,10 @@
                   </div>
 
                   <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="acceptTerms">
-                    <label class="form-check-label" for="acceptTerms">I accept <a href="#">terms & conditions.</a></label>
+                    <input type="checkbox" class="form-check-input" id="acceptTerms" />
+                    <label class="form-check-label" for="acceptTerms"
+                      >I accept <a href="#">terms & conditions.</a></label
+                    >
                   </div>
 
                   <div class="form-group mt-5">
@@ -180,12 +200,11 @@
 
           <div class="text-center" v-if="submitStatus === 'SUCCESS'">
             <h5 class="mb-4">Almost there ...</h5>
+            <p>Please check your email ({{ formData.email }}) to confirm your account.</p>
+            <hr />
             <p>
-              Please check your email ({{formData.email}}) to confirm your account.
-            </p>
-            <hr>
-            <p>
-              If <strong>{{formData.email}}</strong> is not your email address, please go back and enter the correct one.
+              If <strong>{{ formData.email }}</strong> is not your email address, please go back and enter the correct
+              one.
             </p>
             <p>
               If you haven't received our email in 15 minutes, please check your spam folder.
@@ -239,8 +258,8 @@ export default {
       },
       gender: {
         required,
-      }
-    }
+      },
+    },
   },
   methods: {
     async submit() {
@@ -249,11 +268,9 @@ export default {
         this.submitStatus = SubmitStatusEnum.Pending;
 
         try {
-
           await userService.signup(this.formData);
 
           this.submitStatus = SubmitStatusEnum.Success;
-
         } catch (error) {
           this.submitStatus = SubmitStatusEnum.Error;
           this.errorMessage = error.message;
@@ -265,7 +282,7 @@ export default {
 </script>
 
 <style scoped>
-  input[type="radio"]:checked + .card {
-    box-shadow: 0 0 1px 1px #007bff;
-  }
+input[type='radio']:checked + .card {
+  box-shadow: 0 0 1px 1px #007bff;
+}
 </style>

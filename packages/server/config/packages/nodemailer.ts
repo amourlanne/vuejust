@@ -17,7 +17,7 @@ export default {
     options: {
       extension: 'twig',
     },
-    root: 'src/templates/email',
+    root: 'templates/email',
   },
   transport: nodemailer.createTransport(MailDevTransport),
 };

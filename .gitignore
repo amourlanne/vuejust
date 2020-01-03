@@ -163,3 +163,6 @@ modules.xml
 # Markdown Navigator plugin
 
 # End of https://www.gitignore.io/api/git,webstorm,phpstorm
+
+# Dependency directories
+node_modules/

@@ -1,9 +1,9 @@
-import typeorm from './modules/typeorm';
-import cors from './modules/cors';
-import server from './modules/server';
-import security from './modules/security';
-import nodemailer from './modules/nodemailer';
-import multer from './modules/multer';
+import typeorm from './packages/typeorm';
+import cors from './packages/cors';
+import server from './packages/server';
+import security from './packages/security';
+import nodemailer from './packages/nodemailer';
+import multer from './packages/multer';
 
 export default {
   typeorm: typeorm,

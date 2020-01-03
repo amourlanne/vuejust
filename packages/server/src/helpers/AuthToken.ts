@@ -1,7 +1,7 @@
 import { Req } from '@tsed/common';
 import jwt from 'jsonwebtoken';
 import config from '../../config';
-import { User } from '../entity/User';
+import { User } from '../Entity/User';
 import { IUserTokenPayload } from '../interfaces/IUserTokenPayload';
 
 export class AuthToken {

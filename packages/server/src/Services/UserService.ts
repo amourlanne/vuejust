@@ -1,7 +1,7 @@
 import { Service } from '@tsed/di';
-import { UserRepository } from '../repository/UserRepository';
+import { UserRepository } from '../Repository/UserRepository';
 import { AuthToken } from '../helpers/AuthToken';
-import { User } from '../entity/User';
+import { User } from '../Entity/User';
 import { FindConditions, FindOneOptions, LessThan, MoreThan } from 'typeorm';
 
 import moment from 'moment';

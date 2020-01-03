@@ -4,7 +4,7 @@ export default {
   passwordReset(email: string): Promise<[]> {
     return new Promise((resolve, reject) => {
       axios
-        .post( '/password-reset', null, {
+        .post('/password-reset', null, {
           params: {
             email,
           },

@@ -9,7 +9,6 @@
           </div>
           <div class="card  my-5">
             <div class="card-body">
-
               <p class="text-success text-center" v-if="submitStatus === 'OK'">
                 Thanks for your submission!
               </p>
@@ -23,11 +22,9 @@
               <form @submit.prevent="submit">
                 <div class="form-group">
                   <label>Username or Email</label>
-                  <div
-                    class="input-group"
-                  >
+                  <div class="input-group">
                     <input
-                      :class="['form-control', {'is-invalid': $v.username.$error}] "
+                      :class="['form-control', { 'is-invalid': $v.username.$error }]"
                       name=""
                       placeholder="Username or email"
                       type="text"
@@ -71,9 +68,7 @@
                   </button>
                 </div>
               </form>
-              <router-link :to="{ name: 'signup' }" class="btn btn-outline-primary btn-block mb-3"
-                >Sign up</router-link
-              >
+              <router-link :to="{ name: 'signup' }" class="btn btn-outline-primary btn-block mb-3">Sign up</router-link>
               <p class="text-center">
                 <router-link :to="{ name: 'password-reset' }" class="text-center">{{
                   $t('auth.forgotPassword')
@@ -134,7 +129,7 @@ export default {
         } catch (error) {
           this.submitStatus = 'ERROR';
 
-          if(error) {
+          if (error) {
             this.errorMessage = error.message;
           }
         }

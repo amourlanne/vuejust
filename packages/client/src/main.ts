@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuelidate from 'vuelidate';
 import VueCookies from 'vue-cookies';
 
-import vuelidateErrorExtractor from "vuelidate-error-extractor";
+import vuelidateErrorExtractor from 'vuelidate-error-extractor';
 
 import { Helmet } from '@jnields/vue-helmet';
 
@@ -55,5 +55,5 @@ new Vue({
 }).$mount('#app');
 
 function registerComponents() {
-  Vue.component("helmet", Helmet);
+  Vue.component('helmet', Helmet);
 }

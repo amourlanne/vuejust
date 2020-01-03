@@ -5,7 +5,6 @@ import i18n from './translation';
 import locales from '@/locales.json';
 import PageNotFound from '@/views/PageNotFound.vue';
 
-import * as config from '../../../config.json';
 import authenticationService from './services/authentication.service';
 
 Vue.use(VueRouter);
@@ -131,8 +130,7 @@ router.beforeEach(async (to, from, next) => {
     });
   }
 
-  const { cookie } = config;
-  const isAuthenticated = !!window.$cookies.get(cookie['token'].payload.name);
+  const isAuthenticated = !!window.$cookies.get('token_payload');
 
   if (isAuthenticated && !store.getters.hasCurrentUser) {
     try {

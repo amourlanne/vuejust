@@ -61,15 +61,14 @@ export default {
         });
     });
   },
-  updateAccountProfile( profile ) {
-
+  updateAccountProfile(profile) {
     let formData = new FormData();
 
     formData.append('firstName', profile.firstName);
     formData.append('lastName', profile.lastName);
     formData.append('email', profile.email);
 
-    if(typeof profile.avatar !== 'undefined') {
+    if (typeof profile.avatar !== 'undefined') {
       formData.append('avatar', profile.avatar);
     }
 

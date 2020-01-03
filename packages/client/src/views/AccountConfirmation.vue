@@ -26,17 +26,17 @@
                   <label>Create a new password *</label>
                   <div class="form-group">
                     <div
-                            :class="{
-                      'input-group': true,
-                      'form-group-error': $v.formData.password.$error,
-                    }"
+                      :class="{
+                        'input-group': true,
+                        'form-group-error': $v.formData.password.$error,
+                      }"
                     >
                       <input
-                              name=""
-                              class="form-control"
-                              placeholder="New password"
-                              type="password"
-                              v-model.trim="$v.formData.password.$model"
+                        name=""
+                        class="form-control"
+                        placeholder="New password"
+                        type="password"
+                        v-model.trim="$v.formData.password.$model"
                       />
                     </div>
                     <small class="form-error form-text text-danger" v-if="!$v.formData.password.required">
@@ -45,17 +45,17 @@
                   </div>
                   <div class="form-group">
                     <div
-                            :class="{
-                      'input-group': true,
-                      'form-group-error': $v.formData.passwordRepeat.$error,
-                    }"
+                      :class="{
+                        'input-group': true,
+                        'form-group-error': $v.formData.passwordRepeat.$error,
+                      }"
                     >
                       <input
-                              name=""
-                              class="form-control"
-                              placeholder="Confirm new password"
-                              type="password"
-                              v-model.trim="$v.formData.passwordRepeat.$model"
+                        name=""
+                        class="form-control"
+                        placeholder="Confirm new password"
+                        type="password"
+                        v-model.trim="$v.formData.passwordRepeat.$model"
                       />
                     </div>
                     <small class="form-error form-text text-danger" v-if="!$v.formData.passwordRepeat.required">
@@ -82,7 +82,7 @@
 
           <div class="text-center" v-if="valid == false">
             <h5>There is a small problem</h5>
-            <hr>
+            <hr />
             This invitation link isn't valid. Perhaps you already used it?
           </div>
         </div>
@@ -96,7 +96,7 @@ import { email, required } from 'vuelidate/lib/validators';
 import LocaleChanger from '../components/LocaleChanger';
 
 import userService from '../services/user.service';
-import { SubmitStatusEnum } from '../enums/SubmitStatusEnum'
+import { SubmitStatusEnum } from '../enums/SubmitStatusEnum';
 
 export default {
   name: 'account-confirmation',
@@ -121,14 +121,14 @@ export default {
       passwordRepeat: {
         required,
       },
-    }
+    },
   },
   async beforeMount() {
     this.token = this.$route.params.token;
     try {
       this.valid = await userService.accountConfirmationValidateToken(this.token);
     } catch (e) {
-
+      // catch error
     }
   },
   methods: {
@@ -141,9 +141,8 @@ export default {
           await userService.accountConfirmation(this.formData, this.token);
           this.submitStatus = SubmitStatusEnum.Success;
         } catch (e) {
-          this.submitStatus = SubmitStatusEnum.Error
+          this.submitStatus = SubmitStatusEnum.Error;
         }
-
       }
     },
   },

@@ -1,4 +1,4 @@
-import vuelidate from './modules/vuelidate';
+import vuelidate from './packages/vuelidate';
 
 const config = {
   vuelidate: vuelidate,

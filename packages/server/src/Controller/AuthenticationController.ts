@@ -1,6 +1,6 @@
-import { User } from '../entity/User';
-import { UserService } from '../services/UserService';
-import { MailerService } from '../services/MailerService';
+import { User } from '../Entity/User';
+import { UserService } from '../Services/UserService';
+import { MailerService } from '../Services/MailerService';
 import {
   BodyParams,
   Context,
@@ -14,10 +14,10 @@ import {
 
 import { BadRequest } from 'ts-httpexceptions';
 
-import { UserType } from '../form/types/UserType';
-import { AccountConfirmationToken } from '../entity/AccountConfirmationToken';
-import { CredentialsType } from '../form/types/CredentialsType';
-import { PasswordResetToken } from '../entity/PasswordResetToken';
+import { UserType } from '../Form/types/UserType';
+import { AccountConfirmationToken } from '../Entity/AccountConfirmationToken';
+import { CredentialsType } from '../Form/types/CredentialsType';
+import { PasswordResetToken } from '../Entity/PasswordResetToken';
 
 @Controller("/")
 export class AuthenticationController {

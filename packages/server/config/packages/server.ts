@@ -10,7 +10,7 @@ export default <Partial<IModuleOptions>> {
     requestFields: ["body", "reqId", "method", "url", "headers", "query", "params", "duration"]
   },
   mount: {
-    "/": "src/controllers/**/*.ts"
+    "/": "src/Controller/**/*.ts"
   },
   swagger: [
     {

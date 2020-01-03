@@ -1,6 +1,6 @@
 export enum SubmitStatusEnum {
-  Ok = "OK",
-  Pending = "PENDING",
-  Error = "ERROR",
-  Success = "SUCCESS"
+  Ok = 'OK',
+  Pending = 'PENDING',
+  Error = 'ERROR',
+  Success = 'SUCCESS',
 }

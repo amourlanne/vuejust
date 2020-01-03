@@ -1,5 +1,12 @@
 {
   "name": "vuejust",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "scripts": {
+    "lint": "lerna run lint",
+    "start": "lerna run start"
+  },
+  "dependencies": {
+    "lerna": "^3.20.2"
+  }
 }

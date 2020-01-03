@@ -1,5 +1,5 @@
 {
-  "name": "server-tsed",
+  "name": "vuejust-server",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -36,9 +36,9 @@
   },
   "scripts": {
     "start": "ts-node-dev src/index.ts",
-    "migration:generate": "ts-node ./node_modules/typeorm/cli --config config/modules/typeorm.ts migration:generate -n",
-    "migration": "ts-node ./node_modules/typeorm/cli --config config/modules/typeorm.ts migration:run",
-    "migration:revert": "ts-node ./node_modules/typeorm/cli --config config/modules/typeorm.ts migration:revert",
-    "fixtures": "ts-node ./node_modules/typeorm-fixtures-cli/dist/cli --config config/modules/typeorm.ts ./src/fixtures"
+    "migration:generate": "ts-node ./node_modules/typeorm/cli --config config/packages/typeorm.ts migration:generate -n",
+    "migration": "ts-node ./node_modules/typeorm/cli --config config/packages/typeorm.ts migration:run",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli --config config/packages/typeorm.ts migration:revert",
+    "fixtures": "ts-node ./node_modules/typeorm-fixtures-cli/dist/cli --config config/packages/typeorm.ts src/Fixtures"
   }
 }

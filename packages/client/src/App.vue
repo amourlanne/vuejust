@@ -16,10 +16,9 @@ import { HelmetProvider } from '@jnields/vue-helmet';
 export default Vue.extend({
   name: 'app',
   components: {
-    'helmet-provider': HelmetProvider
+    'helmet-provider': HelmetProvider,
   },
 });
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

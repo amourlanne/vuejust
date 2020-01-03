@@ -1,6 +1,6 @@
 import { Context, IMiddleware, Middleware, Req, RequestContext } from '@tsed/common';
 import { AuthToken } from '../helpers/AuthToken';
-import { UserService } from '../services/UserService';
+import { UserService } from '../Services/UserService';
 
 @Middleware()
 export default class UserContextMiddleware implements IMiddleware {

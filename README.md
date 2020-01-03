@@ -21,8 +21,8 @@ Le projet est composé d'une API [Node.js](https://nodejs.org/en/) utilisant le 
 La base de données ([MariaDB](https://mariadb.org/) + PHPMyAdmin), le serveur de mail ([maildev](https://github.com/maildev/maildev)) et le serveur de sessions ([Redis](https://redis.io/)) se mettent en place à l'aide de docker et nottament du fichier docker-compose.
 
 ```
-├── src 
-│   ├── app (application utilisateur Vue.js)
+├── packages 
+│   ├── client (application utilisateur Vue.js)
 │   └── server (API express.js)
 ├── .env
 └── docker-compose.yaml
@@ -40,14 +40,14 @@ git clone git@github.com:amourlanne/vuejust.git
 
 #### Installer les dépendances
 
-Dans `src/server` et `src/app`
+Dans `packages/server` et `packages/client`
 ```bash
 yarn # ou 'npm install'
 ```
 
 ## Configuration
 Les applicatifs docker se configurent dans le fichier `.env` à la racine du dépôt.
-La configuration de l'ORM se fait dans le fichier `ormconfig.json` dans `src/server`.
+La configuration de l'ORM se fait dans le fichier `ormconfig.json` dans `packages/server`.
 
 ## Utilisation
 
@@ -57,12 +57,12 @@ La configuration de l'ORM se fait dans le fichier `ormconfig.json` dans `src/ser
 docker-compose up -d --build
 ```
 ### Lancer les applications en developpement
-Lancer l'API dans `src/server` et l'application utilisateur dans `src/app`
+Lancer l'API dans `packages/server` et l'application utilisateur dans `packages/client`
 ```bash
 yarn start
 ```
 ### Build en production
-Build l'API dans `src/server` et l'application utilisateur dans `src/app`
+Build l'API dans `packages/server` et l'application utilisateur dans `packages/client`
 ```bash
 yarn build
 ```
@@ -70,7 +70,7 @@ yarn build
 ## Utilisation avancée
 
 ### Migrations
-L'application utilise la librairie [typeorm](https://github.com/typeorm/typeorm) pour le mapping des entites (dans `src/server`).
+L'application utilise la librairie [typeorm](https://github.com/typeorm/typeorm) pour le mapping des entites (dans `packages/server`).
 #### Generer une migration
 ```bash
 yarn migration:generate 'migration-name' # ou npm run migration:generate 'migration-name'
@@ -83,14 +83,14 @@ yarn migration # ou npm run migration
 ```
 
 ### Fixtures
-L'application utilise la librairie [typeorm-fixtures](https://github.com/RobinCK/typeorm-fixtures) pour les fixtures (dans `src/server`).
+L'application utilise la librairie [typeorm-fixtures](https://github.com/RobinCK/typeorm-fixtures) pour les fixtures (dans `packages/server`).
 ```bash
 yarn fixtures # ou npm run fixtures
 ```
 
 ### Tests
 
-Lancer les tests de l'API dans `src/server` et de l'application utilisateur dans `src/app`
+Lancer les tests de l'API dans `packages/server` et de l'application utilisateur dans `packages/client`
 
 ```bash
 yarn test # ou npm run test

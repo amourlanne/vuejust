@@ -11,8 +11,8 @@ import { AccountConfirmationToken } from './AccountConfirmationToken';
 
 import bcrypt from 'bcryptjs';
 
-import { RoleEnum } from '../enums/RoleEnum';
-import { GenderEnum } from '../enums/GenderEnum';
+import { RoleEnum } from '../Enums/RoleEnum';
+import { GenderEnum } from '../Enums/GenderEnum';
 
 import { Email, Enum, MaxLength, MinLength, Property, Required } from '@tsed/common';
 import { PasswordResetToken } from './PasswordResetToken';

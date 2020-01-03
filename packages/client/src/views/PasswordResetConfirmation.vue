@@ -75,8 +75,11 @@
             </article>
             <div class="text-center" v-if="valid === false">
               <h5>There is a small problem</h5>
-              <hr>
-              This invitation link isn't valid. Check the URL (there should be 10 - 20 digit hex key after /password-reset/) and make sure you copied it in its entirety. Or, you may have used it already, or requested another reset. In the latter case, find the most recent recent request in your email and use that.
+              <hr />
+              This invitation link isn't valid. Check the URL (there should be 10 - 20 digit hex key after
+              /password-reset/) and make sure you copied it in its entirety. Or, you may have used it already, or
+              requested another reset. In the latter case, find the most recent recent request in your email and use
+              that.
             </div>
           </div>
         </div>
@@ -113,14 +116,14 @@ export default {
       passwordRepeat: {
         required,
       },
-    }
+    },
   },
   async beforeMount() {
     this.token = this.$route.params.token;
     try {
       this.valid = await accountService.passwordResetValidateToken(this.token);
     } catch (e) {
-
+      // no empty block
     }
   },
   methods: {
