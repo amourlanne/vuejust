@@ -1,10 +1,5 @@
 {
   "name": "vuejust",
   "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "@babel/preset-env": "^7.7.7",
-    "@babel/preset-typescript": "^7.7.7",
-    "babel-plugin-wildcard": "^5.0.0"
-  }
+  "private": true
 }
