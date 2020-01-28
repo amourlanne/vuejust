@@ -1,5 +1,5 @@
 import {
-  Context, ConverterService,
+  Context, ConverterService, EndpointInfo, EndpointMetadata,
   OverrideProvider,
   Req,
   RequestContext,
@@ -10,43 +10,12 @@ import {
 import { AuthToken } from '../../helpers/AuthToken';
 import { isStream } from '@tsed/core';
 
-// @OverrideProvider(BaseSendResponseMiddleware)
-// export class SendResponseMiddleware {
-//   public use(@Req() request: Req, @Res() response: Res, @Context() context: RequestContext): any {
-//
-//     const {ctx: {data, endpoint}} = request;
-//     console.log(data, context);
-//     if (context.has('user')) {
-//
-//       const token = AuthToken.fromUser(context.get('user'));
-//
-//       response.cookie("token_payload", token.getPayload(), {
-//         sameSite: true,
-//         maxAge: 1800000 // 30min
-//       });
-//
-//       response.cookie("token_signature", token.getSignature(), {
-//         httpOnly: true,
-//         sameSite: true,
-//       });
-//     }
-//
-//     // if(typeof data === 'string') {
-//     //   data = {
-//     //     message: data
-//     //   };
-//     // }
-//
-//     return response.send();
-//   }
-// }
-
 @OverrideProvider(BaseSendResponseMiddleware)
 export class SendResponseMiddleware {
   constructor(private converterService: ConverterService) {
   }
 
-  public use(@ResponseData() data, @Res() response: Res, @Context() context: RequestContext): any {
+  public use(@ResponseData() data, @Res() response: Res, @Context() context: RequestContext, @EndpointInfo() endpoint: EndpointMetadata): any {
 
     if (context.has('user')) {
 
@@ -79,7 +48,7 @@ export class SendResponseMiddleware {
       })
     }
 
-    const payload = this.converterService.serialize(data /*, {type: endpoint.type}*/);
+    const payload = this.converterService.serialize(data, {type: endpoint.type});
 
     return response.json(payload);
   }

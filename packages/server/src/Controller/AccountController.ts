@@ -18,8 +18,6 @@ export class AccountController {
     @MultipartFile("avatar") avatar: Express.Multer.File,
     @Required @BodyParams() accountData: AccountType) {
 
-    // Todo: dev
-    console.log(avatar, accountData);
     return;
 
     const result = this.userRepository.merge(user, <User>accountData);
