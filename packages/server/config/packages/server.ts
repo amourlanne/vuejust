@@ -1,8 +1,9 @@
 import { IModuleOptions } from '@tsed/di';
+import multer from './multer';
 
 export default <Partial<IModuleOptions>> {
   rootDir: "src",
-  acceptMimes: ["application/json"],
+  acceptMimes: ["application/json", "multipart/form-data"],
   port: 3000,
   logger: {
     debug: false,
@@ -17,9 +18,14 @@ export default <Partial<IModuleOptions>> {
       path: "/api-docs"
     }
   ],
+  statics: {
+    "/": "public"
+  },
   componentsScan: [
     "src/middlewares/**/*.ts",
     "src/services/**/*.ts",
     "src/converters/**/*.ts"
   ],
+  uploadDir: "public/media",
+  multer: multer
 }

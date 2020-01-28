@@ -2,6 +2,7 @@ import {GlobalAcceptMimesMiddleware, ServerLoader, ServerSettings} from "@tsed/c
 import { getConnectionManager } from 'typeorm';
 
 import "@tsed/swagger";
+import "@tsed/multipartfiles";
 
 import bodyParser from "body-parser";
 import compress from "compression";
@@ -11,6 +12,7 @@ import cors from "cors";
 import helmet from 'helmet';
 import config from '../config';
 import UserContextMiddleware from './Middlewares/UserContextMiddleware';
+
 
 @ServerSettings(config.server)
 export class Server extends ServerLoader {
@@ -30,7 +32,6 @@ export class Server extends ServerLoader {
    * @returns {Server}
    */
   $beforeRoutesInit(): void | Promise<any> {
-
     this
       .use(cors(config.cors))
       .use(helmet())
@@ -46,3 +47,4 @@ export class Server extends ServerLoader {
       .use(UserContextMiddleware);
   }
 }
+

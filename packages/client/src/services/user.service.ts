@@ -67,6 +67,8 @@ export default {
     formData.append('firstName', profile.firstName);
     formData.append('lastName', profile.lastName);
     formData.append('email', profile.email);
+    //
+    // formData = profile;
 
     if (typeof profile.avatar !== 'undefined') {
       formData.append('avatar', profile.avatar);
@@ -74,7 +76,7 @@ export default {
 
     return new Promise<Object>((resolve, reject) => {
       axios
-        .post(`/account/profile`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+        .post(`/account/profile`, formData)
         .then(response => {
           resolve(response.data);
         })

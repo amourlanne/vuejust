@@ -1,8 +1,6 @@
 import Vue from 'vue';
-import Vuelidate from 'vuelidate';
+import vuelidate from 'vuelidate';
 import VueCookies from 'vue-cookies';
-
-import vuelidateErrorExtractor from 'vuelidate-error-extractor';
 
 import { Helmet } from '@jnields/vue-helmet';
 
@@ -40,10 +38,8 @@ axios.defaults.baseURL = process.env.VUE_APP_API;
 //   },
 // );
 
-Vue.use(Vuelidate);
+Vue.use(vuelidate);
 Vue.use(VueCookies);
-
-// Vue.use(vuelidateErrorExtractor, config.vuelidate);
 
 registerComponents();
 

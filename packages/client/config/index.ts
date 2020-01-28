@@ -1,7 +1,3 @@
-import vuelidate from './packages/vuelidate';
-
-const config = {
-  vuelidate: vuelidate,
-};
+const config = {};
 
 export default config;
