@@ -1,7 +1,6 @@
-import { Email, Enum, MaxLength, MinLength, Property, Required } from '@tsed/common';
+import { Email, Property, Required } from '@tsed/common';
 
 export class AccountType {
-
   @Property()
   @Required()
   firstName: string;

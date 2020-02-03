@@ -12,18 +12,7 @@ export class MultipartFileMiddleware implements IMiddleware {
   constructor(@Configuration() private configuration: Configuration) {
   }
 
-  /**
-   *
-   * @param endpoint
-   * @param request
-   * @param response
-   * @returns {any}
-   */
   async use(@EndpointInfo() endpoint: EndpointMetadata, @Req() request: Req, @Res() response: Res) {
-
-    // if (1 === 1) {
-    //   throw new BadRequest(`This should be thrown and seen on the test failure.`);
-    // }
 
     try {
       const endpointConfiguration = endpoint.store.get(BaseMultipartFileMiddleware);

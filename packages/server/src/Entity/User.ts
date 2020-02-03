@@ -80,6 +80,7 @@ export class User {
   @OneToOne(() => Image, {
     cascade: true,
     eager: true,
+    onDelete: "SET NULL"
   })
   @JoinColumn()
   avatar: Image;

@@ -22,9 +22,9 @@ export default <Partial<IModuleOptions>> {
     "/": "public"
   },
   componentsScan: [
-    "src/middlewares/**/*.ts",
-    "src/services/**/*.ts",
-    "src/converters/**/*.ts"
+    "src/Middlewares/**/*.ts",
+    "src/Services/**/*.ts",
+    "src/Converters/**/*.ts"
   ],
   uploadDir: "public/media",
   multer: multer

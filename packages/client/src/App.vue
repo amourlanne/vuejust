@@ -1,7 +1,7 @@
 <template>
   <helmet-provider>
     <div class="app">
-      <helmet defaultTitle="Smarts" titleTemplate="Smarts | %s">
+      <helmet defaultTitle="Integration continue" titleTemplate="Integration continue | %s">
         <html :lang="this.$i18n.locale"></html>
       </helmet>
       <router-view></router-view>

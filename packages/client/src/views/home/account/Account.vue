@@ -185,7 +185,6 @@ export default {
       lastName: null,
       email: null,
       avatar: null,
-      'remove-avatar': false,
     },
     avatarUrl: null,
     defaultAvatarUrl: 'https://secure.gravatar.com/avatar/2615a3a7473379de6863858e0ec7b32a?s=800&d=identicon',
@@ -266,7 +265,7 @@ export default {
     };
 
     if (avatar) {
-      this.avatarUrl = avatar.path;
+      this.avatarUrl = 'http://localhost:3000/' + avatar.path;
     }
   },
 };
